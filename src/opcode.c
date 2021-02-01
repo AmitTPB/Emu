@@ -30,10 +30,14 @@ int get_instr_length(addresing_mode mode) {
             return 2;
     }
 
-    //panic("Invalid addressing mode.");
+    // panic("Invalid addressing mode.");
     return -1;
 }
 
 void add_opcode(byte opcode, instruction instr) {
     opcode_table[opcode] = instr;
+}
+
+void init_opcodes() {
+    add_opcode(0xea, (instruction) {IMPLIED, instruction_nop});
 }
