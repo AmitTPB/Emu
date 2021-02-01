@@ -82,4 +82,20 @@ void init_opcodes() {
 
     add_opcode(0xc8, (instruction) {IMPLIED,            instruction_iny});
 
+    add_opcode(0x78, (instruction) {IMPLIED,            instruction_sei});
+
+    add_opcode(0x38, (instruction) {IMPLIED,            instruction_sec});
+
+    add_opcode(0xf8, (instruction) {IMPLIED,            instruction_sed});
+
+    add_opcode(0x18, (instruction) {IMPLIED,            instruction_clc});
+    
+    add_opcode(0xd8, (instruction) {IMPLIED,            instruction_cld});
+
+    add_opcode(0x58, (instruction) {IMPLIED,            instruction_cli});
+
+    add_opcode(0xb8, (instruction) {IMPLIED,            instruction_clv});
+
+
+
 }
