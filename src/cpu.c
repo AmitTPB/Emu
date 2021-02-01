@@ -2,6 +2,7 @@
 
 cpu_status *New_CPU() {
     cpu_status *status = (cpu_status *)calloc(1, sizeof(cpu_status));
+    status->P = 0x60;
     status->PC = read_memory(0xFFFC);
     status->SP = 0x00FF;
     return status;
@@ -12,7 +13,7 @@ int exec_instruction(cpu_status *cpu) {
     instruction instr = opcode_table[opcode];
 
     if(instr.function == NULL) {
-        printf("bad opcode %x\n", opcode);
+        printf("bad opcode: %x\n", opcode);
         exit(1);
     }
     
@@ -26,11 +27,13 @@ int main() {
     init_opcodes();
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
+    cpu->X = 2;
 
     memory[0x90] = 0x69;
 
     memset(memory, 0xea, 5);
     memory[5] = 0x88;
+    memory[6] = 0xc8;
     
     while(true) {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);

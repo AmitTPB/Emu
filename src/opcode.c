@@ -75,6 +75,11 @@ void init_opcodes() {
     add_opcode(0x5e, (instruction) {INDEXED_ABSOLUTE_X, instruction_lsr});
 
     add_opcode(0xca, (instruction) {IMPLIED,            instruction_dex});
+
     add_opcode(0x88, (instruction) {IMPLIED,            instruction_dey});
+
+    add_opcode(0xe8, (instruction) {IMPLIED,            instruction_inx});
+
+    add_opcode(0xc8, (instruction) {IMPLIED,            instruction_iny});
 
 }
