@@ -30,13 +30,10 @@ int main() {
     memory[0x90] = 0x69;
 
     memset(memory, 0xea, 5);
-    memory[5] = 0x45;
-    memory[6] = 0x90;
-    memory[7] = 0xea;
+    memory[5] = 0x88;
     
-
     while(true) {
-        printf("A: %x, X: %x, Y: %x\n", cpu->A, cpu->X, cpu->Y);
+        printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
         exec_instruction(cpu);
         getchar();
