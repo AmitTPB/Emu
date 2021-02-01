@@ -3,7 +3,7 @@
 byte read_memory(word addr)
 {
 	// lolpanis
-	return 0xea;
+	return memory[addr];
 }
 
 word read_memory_word(word addr)

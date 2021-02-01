@@ -11,7 +11,6 @@ cpu_status *New_CPU()
 int main()
 {
 	cpu_status *cpu = New_CPU();
-	byte opcode;
 	clear_flag(cpu, C_flag);
 
 	free(cpu);
