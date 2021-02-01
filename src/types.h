@@ -28,13 +28,13 @@ typedef enum {
 } addresing_mode;
 
 typedef enum {
-    C_flag = 1 << 1,
-    Z_flag = 1 << 2,
-    I_flag = 1 << 3,
-    D_flag = 1 << 4,
-    B_flag = 1 << 5,
-    V_flag = 1 << 7,
-    N_flag = 1 << 8
+    C_flag = 1 << 0,
+    Z_flag = 1 << 1,
+    I_flag = 1 << 2,
+    D_flag = 1 << 3,
+    B_flag = 1 << 4,
+    V_flag = 1 << 6,
+    N_flag = 1 << 7
 } flag;
 
 typedef struct {

@@ -74,4 +74,7 @@ void init_opcodes() {
     add_opcode(0x4e, (instruction) {ABSOLUTE,           instruction_lsr});
     add_opcode(0x5e, (instruction) {INDEXED_ABSOLUTE_X, instruction_lsr});
 
+    add_opcode(0xca, (instruction) {IMPLIED,            instruction_dex});
+    add_opcode(0x88, (instruction) {IMPLIED,            instruction_dey});
+
 }

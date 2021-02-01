@@ -2,7 +2,6 @@
 #define LOGIC_OPCODES_H
 #include "../flags.h"
 #include "../memory.h"
-#include "../types.h"
 
 cycle_count instruction_and(cpu_status *status, word input, bool mem);
 cycle_count instruction_eor(cpu_status *status, word input, bool mem);

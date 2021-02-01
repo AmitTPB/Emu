@@ -4,6 +4,7 @@
 #include "types.h"
 #include "opcodes/misc_opcodes.h"
 #include "opcodes/logic_opcodes.h"
+#include "opcodes/arithmetic_opcodes.h"
 
 instruction *New_instruction();
 int get_instr_length(addresing_mode mode);

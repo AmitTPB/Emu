@@ -8,5 +8,6 @@
 #include "types.h"
 
 cpu_status *New_CPU();
+int exec_instruction(cpu_status *cpu);
 
 #endif
