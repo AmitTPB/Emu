@@ -5,21 +5,10 @@
 #include <stdlib.h>
 
 #include "types.h"
+#include "memory.h"
+#include "flags.h"
 #include "opcode.h"
 
-
-
-
-typedef struct {
-    word PC;
-    word SP;
-    byte A, X, Y, P;
-}cpu_status;
-
 cpu_status *New_CPU();
-
-
-
-
 
 #endif
