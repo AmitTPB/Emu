@@ -5,5 +5,7 @@
 
 void set_flag(cpu_status *status, flag f);
 void clear_flag(cpu_status *status, flag f);
+bool check_bit(byte b, unsigned int bit);
+void change_flag(cpu_status *status, bool boolean, flag f);
 
 #endif

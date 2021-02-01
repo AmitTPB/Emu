@@ -3,12 +3,15 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 #define byte uint8_t
 #define word uint16_t
+#define cycle_count unsigned int
+#define signed_byte int8_t
 
-typedef enum
-{
+typedef enum {
     ZERO_PAGE,
     ZERO_PAGE_X,
     ZERO_PAGE_Y,
@@ -24,8 +27,7 @@ typedef enum
     INDIRECT_INDEXED
 } addresing_mode;
 
-typedef enum
-{
+typedef enum {
     C_flag = 1 << 1,
     Z_flag = 1 << 2,
     I_flag = 1 << 3,
@@ -35,17 +37,15 @@ typedef enum
     N_flag = 1 << 8
 } flag;
 
-typedef struct
-{
+typedef struct {
     word PC;
     word SP;
     byte A, X, Y, P;
 } cpu_status;
 
-struct
-{
+struct {
     addresing_mode mode;
-    byte (*function)(cpu_status *status);
+    cycle_count (*function)(cpu_status *status, word input, bool mem);
 } typedef instruction;
 
 instruction opcode_table[256];
