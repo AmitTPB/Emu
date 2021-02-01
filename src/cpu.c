@@ -27,11 +27,17 @@ int main() {
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
 
+    memory[0x90] = 0x69;
+
     memset(memory, 0xea, 5);
+    memory[5] = 0x45;
+    memory[6] = 0x90;
+    memory[7] = 0xea;
+    
 
     while(true) {
+        printf("A: %x, X: %x, Y: %x\n", cpu->A, cpu->X, cpu->Y);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
-        
         exec_instruction(cpu);
         getchar();
     }
