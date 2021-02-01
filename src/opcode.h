@@ -4,6 +4,7 @@
 #include "cpu.h"
 #include "types.h"
 
+
 typedef enum {
     ZERO_PAGE = 0,
     ZERO_PAGE_X,
@@ -23,7 +24,7 @@ typedef enum {
 struct {
     addresing_mode mode;
     byte (*function)(cpu_status *status);
-} typedef instruction;
+}typedef instruction;
 
 instruction opcode_table[256];
 
