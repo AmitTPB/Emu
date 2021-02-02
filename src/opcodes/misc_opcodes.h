@@ -14,4 +14,21 @@ cycle_count instruction_cld(cpu_status *status, word input, bool mem);
 cycle_count instruction_cli(cpu_status *status, word input, bool mem);
 cycle_count instruction_clv(cpu_status *status, word input, bool mem);
 
+cycle_count instruction_jmp(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_lda(cpu_status *status, word input, bool mem);
+cycle_count instruction_ldx(cpu_status *status, word input, bool mem);
+cycle_count instruction_ldy(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_stx(cpu_status *status, word input, bool mem);
+cycle_count instruction_sty(cpu_status *status, word input, bool mem);
+cycle_count instruction_sta(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_tax(cpu_status *status, word input, bool mem);
+cycle_count instruction_tay(cpu_status *status, word input, bool mem);
+cycle_count instruction_tsx(cpu_status *status, word input, bool mem);
+cycle_count instruction_txa(cpu_status *status, word input, bool mem);
+cycle_count instruction_txs(cpu_status *status, word input, bool mem);
+cycle_count instruction_tya(cpu_status *status, word input, bool mem);
+
 #endif

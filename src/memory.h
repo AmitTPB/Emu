@@ -6,6 +6,7 @@
 
 byte memory[MEM_SIZE];
 byte read_memory(word addr);
+void write_memory(word addr, byte value);
 word read_memory_word(word addr);
 word to_little_endian(byte b1, byte b2);
 
