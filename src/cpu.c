@@ -3,7 +3,7 @@
 cpu_status *New_CPU() {
     cpu_status *status = (cpu_status *)calloc(1, sizeof(cpu_status));
     status->P = 0x60;
-    status->PC = read_memory(0xFFFC);
+    status->PC = read_memory_word(0xFFFC);
     status->SP = 0x00FF;
     return status;
 }
@@ -25,17 +25,17 @@ int exec_instruction(cpu_status *cpu) {
 
 int main() {
     init_opcodes();
+    memory[0xFFFC] = 0x00;
+    memory[0xFFFD] = 0xff;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
+    
     cpu->X = 2;
 
     memory[0x90] = 0x69;
 
-    memset(memory, 0xea, 5);
-    memory[5] = 0x4e;
-    memory[6] = 0x90;
-    memory[7] = 0x00;
-    memory[8] = 0xea;
+    memory[0xff00] = 0x78;
+    memory[0xff01] = 0x58;
     
     while(1) {
         printf("A: %x, X: %x, Y: %x, P: %x, %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, memory[0x90]);
