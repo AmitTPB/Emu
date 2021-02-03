@@ -32,4 +32,6 @@ cycle_count instruction_txa(cpu_status *status, word input, bool mem);
 cycle_count instruction_txs(cpu_status *status, word input, bool mem);
 cycle_count instruction_tya(cpu_status *status, word input, bool mem);
 
+cycle_count instruction_rol(cpu_status *status, word input, bool mem);
+cycle_count instruction_ror(cpu_status *status, word input, bool mem);
 #endif

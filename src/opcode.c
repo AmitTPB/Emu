@@ -148,4 +148,21 @@ void init_opcodes() {
 	add_opcode(0x9a, (instruction) {IMPLIED,            instruction_txs});
 	add_opcode(0x98, (instruction) {IMPLIED,            instruction_txs});
 
+	add_opcode(0x2a, (instruction) {ACCUMULATOR,        instruction_rol});
+	add_opcode(0x26, (instruction) {ZERO_PAGE,          instruction_rol});
+	add_opcode(0x36, (instruction) {ZERO_PAGE_X,        instruction_rol});
+	add_opcode(0x2e, (instruction) {ABSOLUTE,           instruction_rol});
+	add_opcode(0x3e, (instruction) {INDEXED_ABSOLUTE_X, instruction_rol});
+
+	add_opcode(0x6a, (instruction) {ACCUMULATOR,        instruction_ror});
+	add_opcode(0x66, (instruction) {ZERO_PAGE,          instruction_ror});
+	add_opcode(0x76, (instruction) {ZERO_PAGE_X,        instruction_ror});
+	add_opcode(0x6e, (instruction) {ABSOLUTE,           instruction_ror});
+	add_opcode(0x7e, (instruction) {INDEXED_ABSOLUTE_X, instruction_ror});
+
+	add_opcode(0x0a, (instruction) {ACCUMULATOR,        instruction_asl});
+	add_opcode(0x06, (instruction) {ZERO_PAGE,          instruction_asl});
+	add_opcode(0x16, (instruction) {ZERO_PAGE_X,        instruction_asl});
+	add_opcode(0x0e, (instruction) {ABSOLUTE,           instruction_asl});
+	add_opcode(0x1e, (instruction) {INDEXED_ABSOLUTE_X, instruction_asl});
 }
