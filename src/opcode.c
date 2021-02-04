@@ -178,6 +178,11 @@ void init_opcodes() {
     add_opcode(0x50, (instruction) {ABSOLUTE,           instruction_bvc});
     add_opcode(0x70, (instruction) {ABSOLUTE,           instruction_bvs});
 
+    add_opcode(0x48, (instruction) {ABSOLUTE,           instruction_pha});
+    add_opcode(0x08, (instruction) {ABSOLUTE,           instruction_php});
+    add_opcode(0x68, (instruction) {ABSOLUTE,           instruction_pla});
+    add_opcode(0x28, (instruction) {ABSOLUTE,           instruction_plp});
+
 
     
 }

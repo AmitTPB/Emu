@@ -43,4 +43,9 @@ cycle_count instruction_bne(cpu_status *status, word input, bool mem);
 cycle_count instruction_bpl(cpu_status *status, word input, bool mem);
 cycle_count instruction_bvc(cpu_status *status, word input, bool mem);
 cycle_count instruction_bvs(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_pha(cpu_status *status, word input, bool mem);
+cycle_count instruction_php(cpu_status *status, word input, bool mem);
+cycle_count instruction_pla(cpu_status *status, word input, bool mem);
+cycle_count instruction_plp(cpu_status *status, word input, bool mem);
 #endif

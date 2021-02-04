@@ -253,3 +253,32 @@ cycle_count instruction_bvs(cpu_status *status, word input, bool mem)
     }
     return 0;
 }
+
+cycle_count instruction_pha(cpu_status *status, word input, bool mem)
+{
+    memory[status->SP] = status->A;
+    status->SP++;
+    return 1;
+}
+
+cycle_count instruction_php(cpu_status *status, word input, bool mem)
+{
+    memory[status->SP] = status->P;
+    status->SP++;
+    return 1;
+}
+
+cycle_count instruction_pla(cpu_status *status, word input, bool mem){
+    status->A = memory[status->SP];
+    status->SP--;
+
+    change_flag(status, status->A==0, Z_flag);
+    change_flag(status, check_bit(status->A, 7), N_flag);
+    return 2;
+}
+
+cycle_count instruction_plp(cpu_status *status, word input, bool mem){
+    status->P = memory[status->SP];
+    status->SP--;
+    return 2;
+}

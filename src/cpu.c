@@ -17,6 +17,7 @@ int exec_instruction(cpu_status *cpu)
     if (instr.function == NULL)
     {
         printf("bad opcode: %x\n", opcode);
+        free(cpu);
         exit(1);
     }
 
@@ -36,9 +37,9 @@ int main()
 
     cpu->A = 6;
 
-    memory[0x1234] = 0xef;
-    memory[0xff00] = 0xd0;
-    memory[0xff01] = 0x34;
+    memory[0xff00] = 0x68;
+    memory[0x00ff] = 0xff;
+    
 
     while (1)
     {
