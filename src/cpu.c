@@ -36,11 +36,11 @@ int main()
 
     cpu->A = 6;
 
-    memory[0x90] = 0x69;
-
-    memory[0xff00] = 0x24;
-    memory[0xff01] = 0x58;
-    memory[0x58] = 0xff;
+    
+    memory[0xff00] = 0x0e;
+    memory[0xff01] = 0x03;
+    memory[0xff02] = 0xff;
+    memory[0xff03] = 0x01;
     while (1)
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
