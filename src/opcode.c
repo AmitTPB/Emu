@@ -169,14 +169,22 @@ void init_opcodes() {
 	add_opcode(0x0e, (instruction) {ABSOLUTE,           instruction_asl});
 	add_opcode(0x1e, (instruction) {INDEXED_ABSOLUTE_X, instruction_asl});
 
-    add_opcode(0x90, (instruction) {ABSOLUTE,           instruction_bcc});
-    add_opcode(0xb0, (instruction) {ABSOLUTE,           instruction_bcs});
-    add_opcode(0xf0, (instruction) {ABSOLUTE,           instruction_beq});
-    add_opcode(0x30, (instruction) {ABSOLUTE,           instruction_bmi});
-    add_opcode(0xd0, (instruction) {ABSOLUTE,           instruction_bne});
-    add_opcode(0x10, (instruction) {ABSOLUTE,           instruction_bpl});
-    add_opcode(0x50, (instruction) {ABSOLUTE,           instruction_bvc});
-    add_opcode(0x70, (instruction) {ABSOLUTE,           instruction_bvs});
+    add_opcode(0x90, (instruction) {RELATIVE,           instruction_bcc});
+    add_opcode(0xb0, (instruction) {RELATIVE,           instruction_bcs});
+    add_opcode(0xf0, (instruction) {RELATIVE,           instruction_beq});
+    add_opcode(0x30, (instruction) {RELATIVE,           instruction_bmi});
+    add_opcode(0xd0, (instruction) {RELATIVE,           instruction_bne});
+    add_opcode(0x10, (instruction) {RELATIVE,           instruction_bpl});
+    add_opcode(0x50, (instruction) {RELATIVE,           instruction_bvc});
+    add_opcode(0x70, (instruction) {RELATIVE,           instruction_bvs});
+
+    add_opcode(0x48, (instruction) {IMPLIED,            instruction_pha});
+    add_opcode(0x08, (instruction) {IMPLIED,            instruction_php});
+    add_opcode(0x68, (instruction) {IMPLIED,            instruction_pla});
+    add_opcode(0x28, (instruction) {IMPLIED,            instruction_plp});
+
+    add_opcode(0x20, (instruction) {ABSOLUTE,           instruction_jsr});
+    add_opcode(0x60, (instruction) {IMPLIED,            instruction_rts});
 
 
     
