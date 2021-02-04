@@ -57,3 +57,5 @@ dkms.conf
 src/run
 
 src/.gdb_history
+
+src/memdump

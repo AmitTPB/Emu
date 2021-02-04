@@ -18,6 +18,7 @@ int exec_instruction(cpu_status *cpu)
     {
         printf("bad opcode: %x\n", opcode);
         free(cpu);
+        dump_memory();
         exit(1);
     }
 
@@ -27,14 +28,15 @@ int exec_instruction(cpu_status *cpu)
 }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     init_opcodes();
+    //init_memory();
     memory[0xFFFC] = 0x00;
-    memory[0xFFFD] = 0xff;
+    memory[0xFFFD] = 0x80;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-
+    /*
     cpu->A = 6;
     memory[0xff00] = 0x20;
     memory[0xff01] = 0x34;
@@ -45,6 +47,7 @@ int main()
     memory[0x1234] = 0xa9;
     memory[0x1235] = 0x34;
     memory[0x1236] = 0x60;
+    */
 
     
 
