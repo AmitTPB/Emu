@@ -34,12 +34,13 @@ int main()
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
 
-    cpu->X = 2;
+    cpu->A = 6;
 
     memory[0x90] = 0x69;
 
-    memory[0xff00] = 0x78;
+    memory[0xff00] = 0x24;
     memory[0xff01] = 0x58;
+    memory[0x58] = 0xff;
     while (1)
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);

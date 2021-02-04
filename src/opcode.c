@@ -148,4 +148,7 @@ void init_opcodes() {
 	add_opcode(0x9a, (instruction) {IMPLIED,            instruction_txs});
 	add_opcode(0x98, (instruction) {IMPLIED,            instruction_txs});
 
+    add_opcode(0x24, (instruction) {ZERO_PAGE,          instruction_bit});
+    add_opcode(0x2c, (instruction) {ABSOLUTE,           instruction_bit});
+
 }

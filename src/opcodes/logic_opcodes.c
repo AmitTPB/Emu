@@ -48,3 +48,12 @@ cycle_count instruction_lsr(cpu_status *status, word input, bool mem) {
 
     return mem ? 2 : 0;
 }
+
+cycle_count instruction_bit(cpu_status *status, word input, bool mem)
+{
+    input = memory[input];
+    change_flag(status, check_bit(input, 6), V_flag);
+    change_flag(status, check_bit(input, 7), N_flag);
+    change_flag(status, (status->A&input)==0, Z_flag);
+    return 0;
+}
