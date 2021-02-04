@@ -36,7 +36,7 @@ int main()
 
     cpu->A = 6;
 
-    
+
     memory[0xff00] = 0x0e;
     memory[0xff01] = 0x03;
     memory[0xff02] = 0xff;

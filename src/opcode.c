@@ -168,4 +168,5 @@ void init_opcodes() {
 	add_opcode(0x16, (instruction) {ZERO_PAGE_X,        instruction_asl});
 	add_opcode(0x0e, (instruction) {ABSOLUTE,           instruction_asl});
 	add_opcode(0x1e, (instruction) {INDEXED_ABSOLUTE_X, instruction_asl});
+    
 }
