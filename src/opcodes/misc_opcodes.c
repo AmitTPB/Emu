@@ -151,11 +151,13 @@ cycle_count instruction_rol(cpu_status *status, word input, bool mem)
 {
     byte m = mem ? read_memory(input) : input;
     change_flag(status, check_bit(m, 7), C_flag);
-    if (mem) {
+    if (mem)
+    {
         memory[input] = m << 1 | check_bit(m, 7);
         change_flag(status, check_bit(memory[input], 7), N_flag);
     }
-    else{
+    else
+    {
         status->A = m << 1 | check_bit(m, 7);
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
@@ -166,14 +168,88 @@ cycle_count instruction_ror(cpu_status *status, word input, bool mem)
 {
     byte m = mem ? read_memory(input) : input;
     change_flag(status, check_bit(m, 0), C_flag);
-    if (mem) {
-        memory[input] = m >>1 | check_bit(m, 0) << 7 ;
+    if (mem)
+    {
+        memory[input] = m >> 1 | check_bit(m, 0) << 7;
         change_flag(status, check_bit(memory[input], 7), N_flag);
     }
-    else{
-        status->A = m >>1 | check_bit(m, 0) << 7 ;
+    else
+    {
+        status->A = m >> 1 | check_bit(m, 0) << 7;
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
 }
 
+cycle_count instruction_bcc(cpu_status *status, word input, bool mem)
+{
+    if (!check_bit(status->P, 0))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bcs(cpu_status *status, word input, bool mem)
+{
+    if (check_bit(status->P, 0))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_beq(cpu_status *status, word input, bool mem)
+{
+    if (check_bit(status->P, 1))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bmi(cpu_status *status, word input, bool mem)
+{
+    if (check_bit(status->P, 7))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bne(cpu_status *status, word input, bool mem)
+{
+    if (!check_bit(status->P, 1))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bpl(cpu_status *status, word input, bool mem)
+{
+    if (!check_bit(status->P, 7))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bvc(cpu_status *status, word input, bool mem)
+{
+    if (!check_bit(status->P, 6))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}
+cycle_count instruction_bvs(cpu_status *status, word input, bool mem)
+{
+    if (check_bit(status->P, 6))
+    {
+        status->PC = input-3;
+        return ((input >> 8) > 0) + 1;
+    }
+    return 0;
+}

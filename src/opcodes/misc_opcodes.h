@@ -34,4 +34,13 @@ cycle_count instruction_tya(cpu_status *status, word input, bool mem);
 
 cycle_count instruction_rol(cpu_status *status, word input, bool mem);
 cycle_count instruction_ror(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_bcc(cpu_status *status, word input, bool mem);
+cycle_count instruction_bcs(cpu_status *status, word input, bool mem);
+cycle_count instruction_beq(cpu_status *status, word input, bool mem);
+cycle_count instruction_bmi(cpu_status *status, word input, bool mem);
+cycle_count instruction_bne(cpu_status *status, word input, bool mem);
+cycle_count instruction_bpl(cpu_status *status, word input, bool mem);
+cycle_count instruction_bvc(cpu_status *status, word input, bool mem);
+cycle_count instruction_bvs(cpu_status *status, word input, bool mem);
 #endif
