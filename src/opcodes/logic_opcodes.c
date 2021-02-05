@@ -58,7 +58,7 @@ cycle_count instruction_lsr(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_bit(cpu_status *status, word input, bool mem)
 {
-    input = memory[input];
+    input = read_memory(input);
     change_flag(status, check_bit(input, 6), V_flag);
     change_flag(status, check_bit(input, 7), N_flag);
     change_flag(status, (status->A & input) == 0, Z_flag);

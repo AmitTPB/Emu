@@ -153,8 +153,8 @@ cycle_count instruction_rol(cpu_status *status, word input, bool mem)
     change_flag(status, check_bit(m, 7), C_flag);
     if (mem)
     {
-        memory[input] = m << 1 | check_bit(m, 7);
-        change_flag(status, check_bit(memory[input], 7), N_flag);
+        write_memory(input, (m << 1 | check_bit(m, 7)));
+        change_flag(status, check_bit(read_memory(input), 7), N_flag);
     }
     else
     {
@@ -170,8 +170,8 @@ cycle_count instruction_ror(cpu_status *status, word input, bool mem)
     change_flag(status, check_bit(m, 0), C_flag);
     if (mem)
     {
-        memory[input] = m >> 1 | check_bit(m, 0) << 7;
-        change_flag(status, check_bit(memory[input], 7), N_flag);
+        write_memory(input, (m >> 1 | check_bit(m, 0) << 7));
+        change_flag(status, check_bit(read_memory(input), 7), N_flag);
     }
     else
     {
@@ -258,21 +258,21 @@ cycle_count instruction_bvs(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_pha(cpu_status *status, word input, bool mem)
 {
-    memory[status->SP] = status->A;
+    write_memory(status->SP, status->A);
     status->SP++;
     return 1;
 }
 
 cycle_count instruction_php(cpu_status *status, word input, bool mem)
 {
-    memory[status->SP] = status->P;
+    write_memory(status->SP, status->P);
     status->SP++;
     return 1;
 }
 
 cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 {
-    status->A = memory[status->SP-1];
+    status->A = read_memory(status->SP-1);
     status->SP--;
 
     change_flag(status, status->A == 0, Z_flag);
@@ -282,15 +282,14 @@ cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_plp(cpu_status *status, word input, bool mem)
 {
-    status->P = memory[status->SP-1];
+    status->P = read_memory(status->SP-1);
     status->SP--;
     return 2;
 }
 
 cycle_count instruction_jsr(cpu_status *status, word input, bool mem)
 {
-    memory[status->SP] = status->PC + 2;
-    memory[status->SP + 1] = (status->PC + 2) >> 8;
+    write_memory_word(status->SP, status->PC + 2);
     status->SP += 2;
     status->PC = input - 3;
     return 2;
@@ -298,8 +297,7 @@ cycle_count instruction_jsr(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_rts(cpu_status *status, word input, bool mem)
 {
-    status->PC = memory[status->SP - 1];
-    status->PC = ((status->PC << 8) + memory[status->SP - 2]);
+    status->PC = read_memory_word(status->SP - 2);
     status->SP -= 2;
     return 4;
 }

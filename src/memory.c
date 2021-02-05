@@ -31,5 +31,9 @@ word read_memory_word(word addr)
 {
     return to_little_endian(read_memory(addr), read_memory(addr + 1));
 }
+void write_memory_word(word addr, word value){
+    write_memory(addr, value);
+    write_memory(addr+1, value >> 8);
+}
 
 word to_little_endian(byte b1, byte b2) { return (((word)b2) << 8) | b1; }
