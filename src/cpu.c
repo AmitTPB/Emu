@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     
     
 
-    while (1)
+    while (69)
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
