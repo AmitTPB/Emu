@@ -186,6 +186,13 @@ void init_opcodes() {
     add_opcode(0x20, (instruction) {ABSOLUTE,           instruction_jsr});
     add_opcode(0x60, (instruction) {IMPLIED,            instruction_rts});
 
+	add_opcode(0x69, (instruction) {IMMEDIATE,          instruction_adc});
+	add_opcode(0x65, (instruction) {ZERO_PAGE,          instruction_adc});
+	add_opcode(0x75, (instruction) {ZERO_PAGE_X,        instruction_adc});
+	add_opcode(0x6d, (instruction) {ABSOLUTE,           instruction_adc});
+	add_opcode(0x7d, (instruction) {INDEXED_ABSOLUTE_X, instruction_adc});
+	add_opcode(0x79, (instruction) {INDEXED_ABSOLUTE_Y, instruction_adc});
+	add_opcode(0x61, (instruction) {INDEXED_INDIRECT,   instruction_adc});
+	add_opcode(0x71, (instruction) {INDIRECT_INDEXED,   instruction_adc});
 
-    
 }

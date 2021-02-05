@@ -33,22 +33,16 @@ int main(int argc, char* argv[])
     init_opcodes();
     //init_memory();
     memory[0xFFFC] = 0x00;
-    memory[0xFFFD] = 0x80;
+    memory[0xFFFD] = 0xff;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-    /*
-    cpu->A = 6;
-    memory[0xff00] = 0x20;
-    memory[0xff01] = 0x34;
-    memory[0xff02] = 0x12;
-    memory[0xff03] = 0xa2;
-    memory[0xff04] = 0x69;
-
-    memory[0x1234] = 0xa9;
-    memory[0x1235] = 0x34;
-    memory[0x1236] = 0x60;
-    */
-
+    
+    cpu->A = 0x80;
+    memory[0xff00] = 0x38;
+    memory[0xff01] = 0x69;
+    memory[0xff02] = 0x7f;
+    
+    
     
 
     while (1)

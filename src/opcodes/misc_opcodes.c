@@ -272,7 +272,7 @@ cycle_count instruction_php(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 {
-    status->A = memory[status->SP];
+    status->A = memory[status->SP-1];
     status->SP--;
 
     change_flag(status, status->A == 0, Z_flag);
@@ -282,7 +282,7 @@ cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_plp(cpu_status *status, word input, bool mem)
 {
-    status->P = memory[status->SP];
+    status->P = memory[status->SP-1];
     status->SP--;
     return 2;
 }

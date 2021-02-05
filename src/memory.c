@@ -1,6 +1,6 @@
 #include "memory.h"
 
-void init_memory(char *path[])
+void init_memory(char *path)
 {
     FILE *fp = fopen(path, "rb");
     fseek(fp, 0x10, SEEK_SET);
