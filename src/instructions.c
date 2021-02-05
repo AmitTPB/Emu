@@ -1,4 +1,4 @@
-#include "addressing.h"
+#include "instructions.h"
 
 cycle_count run_instruction(cpu_status *cpu, instruction *instr)
 {

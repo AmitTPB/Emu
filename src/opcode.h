@@ -2,6 +2,7 @@
 #define OPCODE_H
 
 #include "types.h"
+#include "instructions.h"
 #include "opcodes/misc_opcodes.h"
 #include "opcodes/logic_opcodes.h"
 #include "opcodes/arithmetic_opcodes.h"
