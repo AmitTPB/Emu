@@ -2,15 +2,17 @@
 #define INES_H
 
 #include "types.h"
+#include "flags.h"
 
 typedef struct {
-    unsigned int prg_size;
-    unsigned int chr_size;
+    byte prg_size;
+    byte chr_size;
     byte flags[10];
     byte *prg_rom;
     byte *chr_rom;
+    byte *trainer;
 } ines_rom;
 
-ines_rom parse_ines_file(char *filename);
+ines_rom *parse_ines_rom(char *filename);
 
 #endif
