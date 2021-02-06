@@ -13,22 +13,6 @@
 #define signed_byte int8_t
 
 typedef enum {
-    ZERO_PAGE,
-    ZERO_PAGE_X,
-    ZERO_PAGE_Y,
-    ABSOLUTE,
-    INDEXED_ABSOLUTE_X,
-    INDEXED_ABSOLUTE_Y,
-    INDIRECT,
-    IMPLIED,
-    ACCUMULATOR,
-    IMMEDIATE,
-    RELATIVE,
-    INDEXED_INDIRECT,
-    INDIRECT_INDEXED
-} addresing_mode;
-
-typedef enum {
     C_flag = 1 << 0,
     Z_flag = 1 << 1,
     I_flag = 1 << 2,
@@ -36,19 +20,12 @@ typedef enum {
     B_flag = 1 << 4,
     V_flag = 1 << 6,
     N_flag = 1 << 7
-} flag;
+} cpu_flag;
 
 typedef struct {
     word PC;
     word SP;
     byte A, X, Y, P;
 } cpu_status;
-
-struct {
-    addresing_mode mode;
-    cycle_count (*function)(cpu_status *status, word input, bool mem);
-} typedef instruction;
-
-instruction opcode_table[256];
 
 #endif

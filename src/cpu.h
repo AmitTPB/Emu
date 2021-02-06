@@ -1,7 +1,7 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include "addressing.h"
+#include "instructions.h"
 #include "flags.h"
 #include "memory.h"
 #include "opcode.h"
