@@ -61,3 +61,5 @@ src/.gdb_history
 src/memdump
 
 src/cpu_dummy_reads.nes
+
+src/supermario.nes
