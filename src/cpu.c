@@ -25,6 +25,7 @@ int exec_instruction(cpu_status *cpu)
     run_instruction(cpu, &instr);
 
     cpu->PC += get_instr_length(instr.mode);
+    return 0;
 }
 
 
@@ -37,7 +38,7 @@ int main(int argc, char* argv[])
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
     
-    cpu->X = 0x34;
+    cpu->A = 0xFF;
     
     memory[0xff00] = 0x8e;
     memory[0xff01] = 0x33;
@@ -47,9 +48,9 @@ int main(int argc, char* argv[])
     memory[0xff05] = 0x12;
 
 
-    memory[0x1234] = 0xa0;
-    memory[0x1235] = 0x10;
-    memory[0x1236] = 0xa9;
+    memory[0x1234] = 0x69;
+    memory[0x1235] = 0xFF;
+    memory[0x1236] = 0x60;
     memory[0x1237] = 0x34;
     memory[0x1238] = 0xd9;
     memory[0x1239] = 0x23;
