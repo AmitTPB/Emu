@@ -162,6 +162,7 @@ cycle_count instruction_rol(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
+    return 2;
 }
 
 cycle_count instruction_ror(cpu_status *status, word input, bool mem)
@@ -179,6 +180,7 @@ cycle_count instruction_ror(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
+    return 2;
 }
 
 cycle_count instruction_bcc(cpu_status *status, word input, bool mem)

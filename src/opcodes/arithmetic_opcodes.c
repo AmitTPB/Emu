@@ -64,11 +64,12 @@ cycle_count instruction_asl(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
+    return 2;
 }
 
 cycle_count instruction_adc(cpu_status *status, word input, bool mem)
 {
-    byte result, m = mem ? read_memory(input) : input; 
+    byte m = mem ? read_memory(input) : input; 
     /*
     for(int i = 0;i<8;i++){
         byte bit1 = status->A&(1<<i);
@@ -77,12 +78,12 @@ cycle_count instruction_adc(cpu_status *status, word input, bool mem)
     }
     */
     
-    bool sign = check_bit(status->A, 7)==check_bit(m, 7);
-    status->A = status->A + m + check_bit(status->P, 0);
-    if (status->A > 0xff){
+    //bool sign = check_bit(status->A, 7)==check_bit(m, 7);
+    if (status->A + m + check_bit(status->P, 0) > 0xff){
         set_flag(status, C_flag);
         status->A = status->A << 4;
     }
+    status->A = status->A + m + check_bit(status->P, 0);
     change_flag(status, status->A<m, V_flag);
     
     change_flag(status, status->A == 0, Z_flag);

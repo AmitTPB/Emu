@@ -20,10 +20,10 @@ typedef enum {
     INDIRECT_INDEXED
 } addresing_mode;
 
-struct {
+typedef struct {
     addresing_mode mode;
     cycle_count (*function)(cpu_status *status, word input, bool mem);
-} typedef instruction;
+}instruction;
 
 cycle_count run_instruction(cpu_status *cpu, instruction *instr);
 
