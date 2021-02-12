@@ -51,4 +51,7 @@ cycle_count instruction_plp(cpu_status *status, word input, bool mem);
 
 cycle_count instruction_jsr(cpu_status *status, word input, bool mem);
 cycle_count instruction_rts(cpu_status *status, word input, bool mem);
+
+cycle_count instruction_brk(cpu_status *status, word input, bool mem);
+cycle_count instruction_rti(cpu_status *status, word input, bool mem);
 #endif

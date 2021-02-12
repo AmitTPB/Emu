@@ -37,3 +37,23 @@ void write_memory_word(word addr, word value){
 }
 
 word to_little_endian(byte b1, byte b2) { return (((word)b2) << 8) | b1; }
+
+void push_byte(cpu_status *status, byte value){
+    write_memory(status->SP, value);
+    status->SP++;
+}
+
+void push_word(cpu_status *status, word value){
+    write_memory_word(status->SP, value);
+    status->SP+=2;
+}
+
+byte pop_byte(cpu_status *status){
+    status->SP--;
+    return read_memory(status->SP);
+}
+
+word pop_word(cpu_status *status){
+    status->SP-=2;
+    return read_memory_word(status->SP);
+}

@@ -260,22 +260,19 @@ cycle_count instruction_bvs(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_pha(cpu_status *status, word input, bool mem)
 {
-    write_memory(status->SP, status->A);
-    status->SP++;
+    push_byte(status, status->A);
     return 1;
 }
 
 cycle_count instruction_php(cpu_status *status, word input, bool mem)
 {
-    write_memory(status->SP, status->P);
-    status->SP++;
+    push_byte(status, status->P);
     return 1;
 }
 
 cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 {
-    status->A = read_memory(status->SP-1);
-    status->SP--;
+    status->A = pop_byte(status);
 
     change_flag(status, status->A == 0, Z_flag);
     change_flag(status, check_bit(status->A, 7), N_flag);
@@ -284,22 +281,33 @@ cycle_count instruction_pla(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_plp(cpu_status *status, word input, bool mem)
 {
-    status->P = read_memory(status->SP-1);
-    status->SP--;
+    status->P = pop_byte(status);
     return 2;
 }
 
 cycle_count instruction_jsr(cpu_status *status, word input, bool mem)
 {
-    write_memory_word(status->SP, status->PC + 2);
-    status->SP += 2;
+    push_word(status, status->PC + 2);
     status->PC = input - 3;
     return 2;
 }
 
 cycle_count instruction_rts(cpu_status *status, word input, bool mem)
 {
-    status->PC = read_memory_word(status->SP - 2);
-    status->SP -= 2;
+    status->PC = pop_word(status);
+    return 4;
+}
+
+cycle_count instruction_brk(cpu_status *status, word input, bool mem){
+    push_byte(status, status->PC);
+    push_byte(status, status->P);
+    status->PC = read_memory_word(0xFFFE)-1;
+    set_flag(status, B_flag);
+    return 5;
+}
+
+cycle_count instruction_rti(cpu_status *status, word input, bool mem){
+    status->P = pop_byte(status);
+    status->PC = pop_byte(status);
     return 4;
 }
