@@ -14,5 +14,5 @@ typedef struct {
 } ines_rom;
 
 ines_rom *parse_ines_rom(char *filename);
-
+void free_ines_rom(ines_rom *rom);
 #endif
