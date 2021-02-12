@@ -212,6 +212,9 @@ void init_opcodes() {
 	add_opcode(0xc4, (instruction) {ZERO_PAGE,          instruction_cpy});
 	add_opcode(0xcc, (instruction) {ABSOLUTE,           instruction_cpy});
 
+	add_opcode(0x00, (instruction) {IMPLIED,            instruction_brk});
+	add_opcode(0x40, (instruction) {IMPLIED,            instruction_rti});
+
 
 
 
