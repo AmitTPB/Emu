@@ -9,7 +9,7 @@ cpu_status *New_CPU()
     return status;
 }
 
-int exec_instruction(cpu_status *cpu)
+int exec_instruction(cpu_status *cpu, ines_rom *rom)
 {
     byte opcode = read_memory(cpu->PC);
     instruction instr = opcode_table[opcode];
@@ -18,7 +18,8 @@ int exec_instruction(cpu_status *cpu)
     {
         printf("bad opcode: %x\n", opcode);
         free(cpu);
-        dump_memory();
+        free_ines_rom(rom);
+        //dump_memory();
         exit(1);
     }
 
@@ -32,7 +33,7 @@ int exec_instruction(cpu_status *cpu)
 int main(int argc, char* argv[])
 {
     init_opcodes();
-    //init_memory();
+    ines_rom *rom = parse_ines_rom("cpu_dummy_reads.nes");
     memory[0xFFFC] = 0x00;
     memory[0xFFFD] = 0xff;
     memory[0xfffe] = 0x56;
@@ -73,7 +74,7 @@ int main(int argc, char* argv[])
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
-        exec_instruction(cpu);
+        exec_instruction(cpu, rom);
         getchar();
     }
 
