@@ -50,7 +50,7 @@ cycle_count instruction_clv(cpu_status *status, word input, bool mem)
 cycle_count instruction_jmp(cpu_status *status, word input, bool mem)
 {
     assert(mem);
-    status->PC = input;
+    status->PC = input-3;
     return 0;
 }
 
