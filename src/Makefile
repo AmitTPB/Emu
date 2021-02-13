@@ -1,5 +1,5 @@
 CXX = gcc
-CXXFLAGS = -Wall -Wno-unused -Wextra -pedantic -g -fsanitize=address
+CXXFLAGS = -Wall -Wno-unused -Wextra -pedantic -g 
 LDFLAGS =  -fsanitize=address
 
 SRC = *.c opcodes/*.c
@@ -10,6 +10,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LBLIBS)
-
+	-./run
+	rm run
 clean:
 	rm run
