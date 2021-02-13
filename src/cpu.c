@@ -35,11 +35,18 @@ int main(int argc, char* argv[])
     //init_memory();
     memory[0xFFFC] = 0x00;
     memory[0xFFFD] = 0xff;
+    memory[0xfffe] = 0x56;
+    memory[0xffff] = 0x34;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
     
     cpu->A = 0xFF;
     
+    memory[0x3456] = 0x38;
+    memory[0x3457] = 0xf8;
+    memory[0x3458] = 0x40;
+
+
     memory[0xff00] = 0x8e;
     memory[0xff01] = 0x33;
     memory[0xff02] = 0x33;
