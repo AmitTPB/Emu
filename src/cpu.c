@@ -5,7 +5,7 @@ cpu_status *New_CPU()
     cpu_status *status = (cpu_status *)calloc(1, sizeof(cpu_status));
     status->P = 0x60;
     status->PC = read_memory_word(0xFFFC);
-    status->SP = 0x00FF;
+    status->SP = 0xFF;
     return status;
 }
 
