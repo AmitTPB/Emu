@@ -6,8 +6,9 @@
 #include "memory.h"
 #include "opcode.h"
 #include "types.h"
+#include "ines.h"
 
 cpu_status *New_CPU();
-int exec_instruction(cpu_status *cpu);
+int exec_instruction(cpu_status *cpu, ines_rom *rom);
 
 #endif

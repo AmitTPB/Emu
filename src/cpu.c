@@ -5,11 +5,11 @@ cpu_status *New_CPU()
     cpu_status *status = (cpu_status *)calloc(1, sizeof(cpu_status));
     status->P = 0x60;
     status->PC = read_memory_word(0xFFFC);
-    status->SP = 0x00FF;
+    status->SP = 0xFF;
     return status;
 }
 
-int exec_instruction(cpu_status *cpu)
+int exec_instruction(cpu_status *cpu, ines_rom *rom)
 {
     byte opcode = read_memory(cpu->PC);
     instruction instr = opcode_table[opcode];
@@ -18,7 +18,8 @@ int exec_instruction(cpu_status *cpu)
     {
         printf("bad opcode: %x\n", opcode);
         free(cpu);
-        dump_memory();
+        free_ines_rom(rom);
+        //dump_memory();
         exit(1);
     }
 
@@ -32,14 +33,21 @@ int exec_instruction(cpu_status *cpu)
 int main(int argc, char* argv[])
 {
     init_opcodes();
-    //init_memory();
+    ines_rom *rom = parse_ines_rom("cpu_dummy_reads.nes");
     memory[0xFFFC] = 0x00;
     memory[0xFFFD] = 0xff;
+    memory[0xfffe] = 0x56;
+    memory[0xffff] = 0x34;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
     
     cpu->A = 0xFF;
     
+    memory[0x3456] = 0x38;
+    memory[0x3457] = 0xf8;
+    memory[0x3458] = 0x40;
+
+
     memory[0xff00] = 0x8e;
     memory[0xff01] = 0x33;
     memory[0xff02] = 0x33;
@@ -66,7 +74,7 @@ int main(int argc, char* argv[])
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
-        exec_instruction(cpu);
+        exec_instruction(cpu, rom);
         getchar();
     }
 

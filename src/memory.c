@@ -39,21 +39,21 @@ void write_memory_word(word addr, word value){
 word to_little_endian(byte b1, byte b2) { return (((word)b2) << 8) | b1; }
 
 void push_byte(cpu_status *status, byte value){
-    write_memory(status->SP, value);
-    status->SP++;
+    write_memory(status->SP|0x0100, value);
+    status->SP--;
 }
 
 void push_word(cpu_status *status, word value){
-    write_memory_word(status->SP, value);
-    status->SP+=2;
+    write_memory_word((status->SP-1)|0x0100, value);
+    status->SP-=2;
 }
 
 byte pop_byte(cpu_status *status){
-    status->SP--;
-    return read_memory(status->SP);
+    status->SP++;
+    return read_memory(status->SP|0x100);
 }
 
 word pop_word(cpu_status *status){
-    status->SP-=2;
-    return read_memory_word(status->SP);
+    return read_memory_word((status->SP+1)|0x100);
+    status->SP+=2;
 }

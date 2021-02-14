@@ -24,8 +24,7 @@ typedef enum {
 
 typedef struct {
     word PC;
-    word SP;
-    byte A, X, Y, P;
+    byte A, X, Y, P, SP;
 } cpu_status;
 
 #endif
