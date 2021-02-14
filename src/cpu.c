@@ -66,9 +66,6 @@ int main(int argc, char* argv[])
     memory[0x123b] = 0x60;
 
 
-    
-    
-    
 
     while (69)
     {

@@ -15,7 +15,7 @@ ines_rom *parse_ines_rom(char *filename) {
     if(check_bit(rom->flags[0], 3)) fread(rom->trainer, 1, 512, fp);
     rom->prg_rom = calloc(1, ((uint32_t) rom->prg_size) * 16 * 1024);
     fread(rom->prg_rom, 16 * 1024, rom->prg_size, fp);
-    rom->chr_rom = calloc(1, ((uint32_t) rom->chr_size) * 16 * 1024);
+    rom->chr_rom = calloc(1, ((uint32_t) rom->chr_size) * 8 * 1024);
     fread(rom->chr_rom, 8 * 1024, rom->chr_size, fp);
     fclose(fp);
     return rom;
