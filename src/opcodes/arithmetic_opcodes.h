@@ -12,6 +12,7 @@ cycle_count instruction_inc(cpu_status *status, word input, bool mem);
 cycle_count instruction_asl(cpu_status *status, word input, bool mem);
 
 cycle_count instruction_adc(cpu_status *status, word input, bool mem);
+cycle_count instruction_sbc(cpu_status *status, word input, bool mem);
 
 cycle_count instruction_cmp(cpu_status *status, word input, bool mem);
 cycle_count instruction_cpx(cpu_status *status, word input, bool mem);

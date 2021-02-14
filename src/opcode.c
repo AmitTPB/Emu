@@ -195,6 +195,15 @@ void init_opcodes() {
 	add_opcode(0x61, (instruction) {INDEXED_INDIRECT,   instruction_adc});
 	add_opcode(0x71, (instruction) {INDIRECT_INDEXED,   instruction_adc});
 
+	add_opcode(0xe9, (instruction) {IMMEDIATE,          instruction_sbc});
+	add_opcode(0xe5, (instruction) {ZERO_PAGE,          instruction_sbc});
+	add_opcode(0xf5, (instruction) {ZERO_PAGE_X,        instruction_sbc});
+	add_opcode(0xed, (instruction) {ABSOLUTE,           instruction_sbc});
+	add_opcode(0xfd, (instruction) {INDEXED_ABSOLUTE_X, instruction_sbc});
+	add_opcode(0xf9, (instruction) {INDEXED_ABSOLUTE_Y, instruction_sbc});
+	add_opcode(0xe1, (instruction) {INDEXED_INDIRECT,   instruction_sbc});
+	add_opcode(0xf1, (instruction) {INDIRECT_INDEXED,   instruction_sbc});
+
 	add_opcode(0xc9, (instruction) {IMMEDIATE,          instruction_cmp});
 	add_opcode(0xc5, (instruction) {ZERO_PAGE,          instruction_cmp});
 	add_opcode(0xd5, (instruction) {ZERO_PAGE_X,        instruction_cmp});
