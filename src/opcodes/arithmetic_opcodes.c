@@ -21,7 +21,7 @@ cycle_count instruction_dec(cpu_status *status, word input, bool mem)
     write_memory(input, read_memory(input) - 1);
     change_flag(status, read_memory(input) - 1 == 0, Z_flag);
     change_flag(status, check_bit(read_memory(input) - 1, 7), N_flag);
-    return 0;
+    return 2;
 }
 
 cycle_count instruction_inx(cpu_status *status, word input, bool mem)
@@ -64,7 +64,7 @@ cycle_count instruction_asl(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
-    return 2;
+    return mem ? 2:0;
 }
 
 cycle_count instruction_adc(cpu_status *status, word input, bool mem)

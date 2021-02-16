@@ -23,6 +23,7 @@ typedef enum {
 typedef struct {
     addresing_mode mode;
     cycle_count (*function)(cpu_status *status, word input, bool mem);
+    cycle_count cycle_fix;
 }instruction;
 
 cycle_count run_instruction(cpu_status *cpu, instruction *instr);
