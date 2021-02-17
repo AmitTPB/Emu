@@ -51,7 +51,7 @@ cycle_count instruction_jmp(cpu_status *status, word input, bool mem)
 {
     assert(mem);
     status->PC = input-3;
-    return 0;
+    return -1;
 }
 
 cycle_count instruction_lda(cpu_status *status, word input, bool mem)
@@ -83,21 +83,21 @@ cycle_count instruction_ldy(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_sta(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
+    // assert(mem);
     write_memory(input, status->A);
     return 0;
 }
 
 cycle_count instruction_sty(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
+    // assert(mem);
     write_memory(input, status->Y);
     return 0;
 }
 
 cycle_count instruction_stx(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
+    // assert(mem);
     write_memory(input, status->X);
     return 0;
 }
@@ -162,7 +162,7 @@ cycle_count instruction_rol(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
-    return 2;
+    return mem ? 2:0;
 }
 
 cycle_count instruction_ror(cpu_status *status, word input, bool mem)
@@ -180,15 +180,23 @@ cycle_count instruction_ror(cpu_status *status, word input, bool mem)
         change_flag(status, check_bit(status->A, 7), N_flag);
     }
     change_flag(status, status->A == 0, Z_flag);
-    return 2;
+    return mem ? 2:0;
 }
 
 cycle_count instruction_bcc(cpu_status *status, word input, bool mem)
 {
     if (!check_bit(status->P, 0))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -196,8 +204,16 @@ cycle_count instruction_bcs(cpu_status *status, word input, bool mem)
 {
     if (check_bit(status->P, 0))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -205,8 +221,16 @@ cycle_count instruction_beq(cpu_status *status, word input, bool mem)
 {
     if (check_bit(status->P, 1))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -214,8 +238,16 @@ cycle_count instruction_bmi(cpu_status *status, word input, bool mem)
 {
     if (check_bit(status->P, 7))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -223,8 +255,16 @@ cycle_count instruction_bne(cpu_status *status, word input, bool mem)
 {
     if (!check_bit(status->P, 1))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -233,9 +273,16 @@ cycle_count instruction_bpl(cpu_status *status, word input, bool mem)
     if (!check_bit(status->P, 7))
     {
         
-        status->PC += input - 2;
-        printf("bpl out: %x\n", status->PC);
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -243,8 +290,16 @@ cycle_count instruction_bvc(cpu_status *status, word input, bool mem)
 {
     if (!check_bit(status->P, 6))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
@@ -252,8 +307,16 @@ cycle_count instruction_bvs(cpu_status *status, word input, bool mem)
 {
     if (check_bit(status->P, 6))
     {
-        status->PC += input - 2;
-        return ((input >> 8) > 0) + 1;
+        word result;
+        if (check_bit(input, 7)){
+            result = status->PC - ((input&(~(1<<7)))) - 1;
+        }
+        else{
+            result = status->PC + input - 1;
+        }
+        bool new_page = (result>>8)!=status->PC>>8;
+        status->PC=result;
+        return  new_page + 1;
     }
     return 0;
 }
