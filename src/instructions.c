@@ -29,8 +29,16 @@ cycle_count run_instruction(cpu_status *cpu, instruction *instr)
         cycles = (word_arg >> 8 != (word_arg + cpu->X) >> 8) ? 5 : 4;
         cycles += instr->function(cpu, word_arg + cpu->X, true);
         break;
+    case SPECIAL_INDEXED_ABSOLUTE_X:
+        cycles = 5;
+        cycles += instr->function(cpu, word_arg + cpu->X, true);
+        break;
     case INDEXED_ABSOLUTE_Y:
         cycles = (word_arg >> 8 != (word_arg + cpu->Y) >> 8) ? 5 : 4;
+        cycles += instr->function(cpu, word_arg + cpu->Y, true);
+        break;
+    case SPECIAL_INDEXED_ABSOLUTE_Y:
+        cycles = 5;
         cycles += instr->function(cpu, word_arg + cpu->Y, true);
         break;
     case INDIRECT:
@@ -59,6 +67,10 @@ cycle_count run_instruction(cpu_status *cpu, instruction *instr)
         break;
     case INDIRECT_INDEXED: // INDIRECT_Y
         cycles = (read_memory_word(arg1) >> 8 != (read_memory_word(arg1) + cpu->Y) >> 8) ? 6 : 5;
+        cycles += instr->function(cpu, read_memory_word(arg1) + cpu->Y, true);
+        break;
+    case SPECIAL_INDIRECT_INDEXED: // INDIRECT_Y
+        cycles = 6;
         cycles += instr->function(cpu, read_memory_word(arg1) + cpu->Y, true);
         break;
     }
