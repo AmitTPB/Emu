@@ -17,5 +17,4 @@ void push_word(cpu_status *status, word value);
 byte pop_byte(cpu_status *status);
 word pop_word(cpu_status *status);
 
-
 #endif

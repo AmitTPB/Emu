@@ -1,8 +1,8 @@
 #ifndef INES_H
 #define INES_H
 
-#include "types.h"
 #include "flags.h"
+#include "types.h"
 
 typedef struct {
     byte prg_size;
