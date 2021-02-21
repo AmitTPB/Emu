@@ -33,7 +33,8 @@ int exec_instruction(cpu_status *cpu, ines_rom *rom)
 int main(int argc, char* argv[])
 {
     init_opcodes();
-    ines_rom *rom = parse_ines_rom("cpu_dummy_reads.nes");
+    char *nes_path = "cpu_dummy_reads.nes";
+    ines_rom *rom = parse_ines_rom(nes_path);
     memory[0xFFFC] = 0x00;
     memory[0xFFFD] = 0xff;
     memory[0xfffe] = 0x56;

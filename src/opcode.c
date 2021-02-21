@@ -14,6 +14,10 @@ int get_instr_length(addresing_mode mode) {
 			return 3;
 		case INDEXED_ABSOLUTE_Y:
 			return 3;
+		case SPECIAL_INDEXED_ABSOLUTE_X:
+			return 3;
+		case SPECIAL_INDEXED_ABSOLUTE_Y:
+			return 3;
 		case INDIRECT:
 			return 3;
 		case IMPLIED:
@@ -27,6 +31,8 @@ int get_instr_length(addresing_mode mode) {
 		case INDEXED_INDIRECT: // INDIRECT X
 			return 2;
 		case INDIRECT_INDEXED: // INDIRECT Y
+			return 2;
+		case SPECIAL_INDIRECT_INDEXED: // INDIRECT Y
 			return 2;
 	}
 
