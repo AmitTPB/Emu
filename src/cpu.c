@@ -1,7 +1,6 @@
 #include "cpu.h"
 
-cpu_status *New_CPU()
-{
+cpu_status *New_CPU() {
     cpu_status *status = (cpu_status *)calloc(1, sizeof(cpu_status));
     status->P = 0x60;
     status->PC = read_memory_word(0xFFFC);
@@ -9,17 +8,15 @@ cpu_status *New_CPU()
     return status;
 }
 
-int exec_instruction(cpu_status *cpu, ines_rom *rom)
-{
+int exec_instruction(cpu_status *cpu, ines_rom *rom) {
     byte opcode = read_memory(cpu->PC);
     instruction instr = opcode_table[opcode];
 
-    if (instr.function == NULL)
-    {
+    if (instr.function == NULL) {
         printf("bad opcode: %x\n", opcode);
         free(cpu);
         free_ines_rom(rom);
-        //dump_memory();
+        // dump_memory();
         exit(1);
     }
 
@@ -29,9 +26,7 @@ int exec_instruction(cpu_status *cpu, ines_rom *rom)
     return 0;
 }
 
-
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
     init_opcodes();
     char *nes_path = "cpu_dummy_reads.nes";
     ines_rom *rom = parse_ines_rom(nes_path);
@@ -41,9 +36,9 @@ int main(int argc, char* argv[])
     memory[0xffff] = 0x34;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-    
+
     cpu->A = 0x90;
-    
+
     memory[0x3456] = 0x38;
     memory[0x3457] = 0xb0;
     memory[0x3458] = 0x10;
@@ -57,7 +52,6 @@ int main(int argc, char* argv[])
     memory[0xfef3] = 0x69;
     memory[0xff04] = 0x12;
 
-
     memory[0x1234] = 0xe9;
     memory[0x1235] = 0xa0;
     memory[0x1236] = 0xa9;
@@ -67,12 +61,10 @@ int main(int argc, char* argv[])
     memory[0x123a] = 0x33;
     memory[0x123b] = 0x60;
 
-
-
-    while (69)
-    {
+    while (69) {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
-        printf("current instruction is %x at %x\n", read_memory(cpu->PC), cpu->PC);
+        printf("current instruction is %x at %x\n", read_memory(cpu->PC),
+               cpu->PC);
         exec_instruction(cpu, rom);
         getchar();
     }
