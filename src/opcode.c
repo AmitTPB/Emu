@@ -14,6 +14,10 @@ int get_instr_length(addresing_mode mode) {
 			return 3;
 		case INDEXED_ABSOLUTE_Y:
 			return 3;
+		case SPECIAL_INDEXED_ABSOLUTE_X:
+			return 3;
+		case SPECIAL_INDEXED_ABSOLUTE_Y:
+			return 3;
 		case INDIRECT:
 			return 3;
 		case IMPLIED:
@@ -27,6 +31,8 @@ int get_instr_length(addresing_mode mode) {
 		case INDEXED_INDIRECT: // INDIRECT X
 			return 2;
 		case INDIRECT_INDEXED: // INDIRECT Y
+			return 2;
+		case SPECIAL_INDIRECT_INDEXED: // INDIRECT Y
 			return 2;
 	}
 
@@ -72,7 +78,7 @@ void init_opcodes() {
 	add_opcode(0x46, (instruction) {ZERO_PAGE,          instruction_lsr});
 	add_opcode(0x56, (instruction) {ZERO_PAGE_X,        instruction_lsr});
 	add_opcode(0x4e, (instruction) {ABSOLUTE,           instruction_lsr});
-	add_opcode(0x5e, (instruction) {INDEXED_ABSOLUTE_X, instruction_lsr});
+	add_opcode(0x5e, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_lsr});
 
 	add_opcode(0xca, (instruction) {IMPLIED,            instruction_dex});
 
@@ -81,7 +87,7 @@ void init_opcodes() {
 	add_opcode(0xc6, (instruction) {ZERO_PAGE,          instruction_dec});
 	add_opcode(0xd6, (instruction) {ZERO_PAGE_X,        instruction_dec});
 	add_opcode(0xce, (instruction) {ABSOLUTE,           instruction_dec});
-	add_opcode(0xde, (instruction) {INDEXED_ABSOLUTE_X, instruction_dec});
+	add_opcode(0xde, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_dec});
 
 	add_opcode(0xe8, (instruction) {IMPLIED,            instruction_inx});
 
@@ -90,7 +96,7 @@ void init_opcodes() {
 	add_opcode(0xe6, (instruction) {ZERO_PAGE,          instruction_inc});
 	add_opcode(0xf6, (instruction) {ZERO_PAGE_X,        instruction_inc});
 	add_opcode(0xee, (instruction) {ABSOLUTE,           instruction_inc});
-	add_opcode(0xfe, (instruction) {INDEXED_ABSOLUTE_X, instruction_inc});
+	add_opcode(0xfe, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_inc});
 
 	add_opcode(0x78, (instruction) {IMPLIED,            instruction_sei});
 	add_opcode(0x38, (instruction) {IMPLIED,            instruction_sec});
@@ -100,8 +106,8 @@ void init_opcodes() {
 	add_opcode(0x58, (instruction) {IMPLIED,            instruction_cli});
 	add_opcode(0xb8, (instruction) {IMPLIED,            instruction_clv});
 
-	add_opcode(0x4c, (instruction) {ABSOLUTE,            instruction_jmp});
-	add_opcode(0x6c, (instruction) {INDIRECT,            instruction_jmp});
+	add_opcode(0x4c, (instruction) {ABSOLUTE,           instruction_jmp});
+	add_opcode(0x6c, (instruction) {INDIRECT,           instruction_jmp});
 
 	add_opcode(0xa9, (instruction) {IMMEDIATE,          instruction_lda});
 	add_opcode(0xa5, (instruction) {ZERO_PAGE,          instruction_lda});
@@ -128,10 +134,10 @@ void init_opcodes() {
 	add_opcode(0x85, (instruction) {ZERO_PAGE,          instruction_sta});
 	add_opcode(0x95, (instruction) {ZERO_PAGE_X,        instruction_sta});
 	add_opcode(0x8d, (instruction) {ABSOLUTE,           instruction_sta});
-	add_opcode(0x9d, (instruction) {INDEXED_ABSOLUTE_X, instruction_sta});
-	add_opcode(0x99, (instruction) {INDEXED_ABSOLUTE_Y, instruction_sta});
+	add_opcode(0x9d, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_sta});
+	add_opcode(0x99, (instruction) {SPECIAL_INDEXED_ABSOLUTE_Y, instruction_sta});
 	add_opcode(0x81, (instruction) {INDEXED_INDIRECT,   instruction_sta});
-	add_opcode(0x91, (instruction) {INDIRECT_INDEXED,   instruction_sta});
+	add_opcode(0x91, (instruction) {SPECIAL_INDIRECT_INDEXED,   instruction_sta});
 
 	add_opcode(0x86, (instruction) {ZERO_PAGE,          instruction_stx});
 	add_opcode(0x96, (instruction) {ZERO_PAGE_Y,        instruction_stx});
@@ -155,19 +161,19 @@ void init_opcodes() {
 	add_opcode(0x26, (instruction) {ZERO_PAGE,          instruction_rol});
 	add_opcode(0x36, (instruction) {ZERO_PAGE_X,        instruction_rol});
 	add_opcode(0x2e, (instruction) {ABSOLUTE,           instruction_rol});
-	add_opcode(0x3e, (instruction) {INDEXED_ABSOLUTE_X, instruction_rol});
+	add_opcode(0x3e, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_rol});
 
 	add_opcode(0x6a, (instruction) {ACCUMULATOR,        instruction_ror});
 	add_opcode(0x66, (instruction) {ZERO_PAGE,          instruction_ror});
 	add_opcode(0x76, (instruction) {ZERO_PAGE_X,        instruction_ror});
 	add_opcode(0x6e, (instruction) {ABSOLUTE,           instruction_ror});
-	add_opcode(0x7e, (instruction) {INDEXED_ABSOLUTE_X, instruction_ror});
+	add_opcode(0x7e, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_ror});
 
 	add_opcode(0x0a, (instruction) {ACCUMULATOR,        instruction_asl});
 	add_opcode(0x06, (instruction) {ZERO_PAGE,          instruction_asl});
 	add_opcode(0x16, (instruction) {ZERO_PAGE_X,        instruction_asl});
 	add_opcode(0x0e, (instruction) {ABSOLUTE,           instruction_asl});
-	add_opcode(0x1e, (instruction) {INDEXED_ABSOLUTE_X, instruction_asl});
+	add_opcode(0x1e, (instruction) {SPECIAL_INDEXED_ABSOLUTE_X, instruction_asl});
 
     add_opcode(0x90, (instruction) {RELATIVE,           instruction_bcc});
     add_opcode(0xb0, (instruction) {RELATIVE,           instruction_bcs});

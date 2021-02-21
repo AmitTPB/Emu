@@ -33,7 +33,8 @@ int exec_instruction(cpu_status *cpu, ines_rom *rom)
 int main(int argc, char* argv[])
 {
     init_opcodes();
-    ines_rom *rom = parse_ines_rom("cpu_dummy_reads.nes");
+    char *nes_path = "cpu_dummy_reads.nes";
+    ines_rom *rom = parse_ines_rom(nes_path);
     memory[0xFFFC] = 0x00;
     memory[0xFFFD] = 0xff;
     memory[0xfffe] = 0x56;
@@ -44,16 +45,17 @@ int main(int argc, char* argv[])
     cpu->A = 0x90;
     
     memory[0x3456] = 0x38;
-    memory[0x3457] = 0xf8;
-    memory[0x3458] = 0x40;
+    memory[0x3457] = 0xb0;
+    memory[0x3458] = 0x10;
+    memory[0x3468] = 0xa9;
+    memory[0x3469] = 0x69;
 
-
-    memory[0xff00] = 0xb8;
-    memory[0xff01] = 0xea;
-    memory[0xff02] = 0xea;
-    memory[0xff03] = 0x20;
-    memory[0xff04] = 0x34;
-    memory[0xff05] = 0x12;
+    memory[0xff00] = 0x38;
+    memory[0xff01] = 0xb0;
+    memory[0xff02] = 0x90;
+    memory[0xfef2] = 0xa9;
+    memory[0xfef3] = 0x69;
+    memory[0xff04] = 0x12;
 
 
     memory[0x1234] = 0xe9;
