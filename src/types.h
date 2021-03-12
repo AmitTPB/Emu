@@ -12,7 +12,8 @@
 #define cycle_count unsigned int
 #define signed_byte int8_t
 
-typedef enum {
+typedef enum
+{
     C_flag = 1 << 0,
     Z_flag = 1 << 1,
     I_flag = 1 << 2,
@@ -22,7 +23,8 @@ typedef enum {
     N_flag = 1 << 7
 } cpu_flag;
 
-typedef struct {
+typedef struct
+{
     word PC;
     byte A, X, Y, P, SP;
 } cpu_status;

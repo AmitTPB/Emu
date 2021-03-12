@@ -1,6 +1,7 @@
 #include "logic_opcodes.h"
 
-cycle_count instruction_and(cpu_status *status, word input, bool mem) {
+cycle_count instruction_and(cpu_status *status, word input, bool mem)
+{
     byte m = mem ? read_memory(input) : input;
     status->A &= m;
 
@@ -10,7 +11,8 @@ cycle_count instruction_and(cpu_status *status, word input, bool mem) {
     return 0;
 }
 
-cycle_count instruction_eor(cpu_status *status, word input, bool mem) {
+cycle_count instruction_eor(cpu_status *status, word input, bool mem)
+{
     byte m = mem ? read_memory(input) : input;
     status->A ^= m;
 
@@ -20,7 +22,8 @@ cycle_count instruction_eor(cpu_status *status, word input, bool mem) {
     return 0;
 }
 
-cycle_count instruction_ora(cpu_status *status, word input, bool mem) {
+cycle_count instruction_ora(cpu_status *status, word input, bool mem)
+{
     byte m = mem ? read_memory(input) : input;
     status->A |= m;
 
@@ -30,13 +33,17 @@ cycle_count instruction_ora(cpu_status *status, word input, bool mem) {
     return 0;
 }
 
-cycle_count instruction_lsr(cpu_status *status, word input, bool mem) {
+cycle_count instruction_lsr(cpu_status *status, word input, bool mem)
+{
     byte value;
 
-    if (mem) {
+    if (mem)
+    {
         value = read_memory(input);
         write_memory(input, value >> 1);
-    } else {
+    }
+    else
+    {
         value = status->A;
         status->A = value >> 1;
     }
@@ -49,7 +56,8 @@ cycle_count instruction_lsr(cpu_status *status, word input, bool mem) {
     return mem ? 2 : 0;
 }
 
-cycle_count instruction_bit(cpu_status *status, word input, bool mem) {
+cycle_count instruction_bit(cpu_status *status, word input, bool mem)
+{
     input = read_memory(input);
     change_flag(status, check_bit(input, 6), V_flag);
     change_flag(status, check_bit(input, 7), N_flag);

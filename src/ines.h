@@ -4,7 +4,8 @@
 #include "flags.h"
 #include "types.h"
 
-typedef struct {
+typedef struct
+{
     byte prg_size;
     byte chr_size;
     byte flags[10];

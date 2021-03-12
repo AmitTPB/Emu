@@ -4,7 +4,8 @@
 #include "memory.h"
 #include "types.h"
 
-typedef enum {
+typedef enum
+{
     ZERO_PAGE,
     ZERO_PAGE_X,
     ZERO_PAGE_Y,
@@ -23,7 +24,8 @@ typedef enum {
     SPECIAL_INDIRECT_INDEXED
 } addresing_mode;
 
-typedef struct {
+typedef struct
+{
     addresing_mode mode;
     cycle_count (*function)(cpu_status *status, word input, bool mem);
     // cycle_count cycle_fix;
