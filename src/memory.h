@@ -2,6 +2,7 @@
 #define MEMORY_H
 
 #include "types.h"
+#include "mappers/mappers.h"
 #define MEM_SIZE 65536
 
 byte memory[MEM_SIZE];

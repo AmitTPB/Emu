@@ -2,7 +2,7 @@ CXX = gcc
 CXXFLAGS = -Wall -Wno-unused -Wextra -pedantic -g 
 LDFLAGS =  -fsanitize=address
 
-SRC = *.c opcodes/*.c
+SRC = *.c opcodes/*.c mappers/*.c
 OBJ = $(SRC:.cc=.o)
 TARGET = run
 

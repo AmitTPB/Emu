@@ -32,6 +32,8 @@ int exec_instruction(cpu_status *cpu, ines_rom *rom)
 int main(int argc, char *argv[])
 {
     init_opcodes();
+    mapper *mmu = malloc(sizeof(mapper));
+    init_mapper(0, mmu);
     char *nes_path = "cpu_dummy_reads.nes";
     ines_rom *rom = parse_ines_rom(nes_path);
     memory[0xFFFC] = 0x00;
@@ -40,6 +42,7 @@ int main(int argc, char *argv[])
     memory[0xffff] = 0x34;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
+    mmu->read_byte(1);
 
     cpu->A = 0x90;
 
