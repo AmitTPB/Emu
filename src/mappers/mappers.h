@@ -7,4 +7,5 @@ typedef struct {
     void (*write_byte)(word addr, byte value);
     void (*write_word)(word addr, word value);
 } mapper;
-void init_mapper(int mapper_num, mapper *map);
+extern mapper mmu;
+void init_mapper(int mapper_num);
