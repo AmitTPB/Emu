@@ -1,5 +1,5 @@
 #include "instructions.h"
-
+instruction opcode_table[256];
 cycle_count run_instruction(cpu_status *cpu, instruction *instr)
 {
     byte arg1 = read_memory(cpu->PC + 1);

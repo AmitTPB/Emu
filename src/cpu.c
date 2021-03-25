@@ -32,41 +32,15 @@ int exec_instruction(cpu_status *cpu, ines_rom *rom)
 int main(int argc, char *argv[])
 {
     init_opcodes();
-    mapper *mmu = malloc(sizeof(mapper));
-    init_mapper(0, mmu);
+    init_mapper(0);
     char *nes_path = "cpu_dummy_reads.nes";
     ines_rom *rom = parse_ines_rom(nes_path);
-    memory[0xFFFC] = 0x00;
-    memory[0xFFFD] = 0xff;
-    memory[0xfffe] = 0x56;
-    memory[0xffff] = 0x34;
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-    mmu->read_byte(1);
+    mmu.cpu_read_byte(1);
 
     cpu->A = 0x90;
-
-    memory[0x3456] = 0x38;
-    memory[0x3457] = 0xb0;
-    memory[0x3458] = 0x10;
-    memory[0x3468] = 0xa9;
-    memory[0x3469] = 0x69;
-
-    memory[0xff00] = 0x38;
-    memory[0xff01] = 0xb0;
-    memory[0xff02] = 0x90;
-    memory[0xfef2] = 0xa9;
-    memory[0xfef3] = 0x69;
-    memory[0xff04] = 0x12;
-
-    memory[0x1234] = 0xe9;
-    memory[0x1235] = 0xa0;
-    memory[0x1236] = 0xa9;
-    memory[0x1237] = 0x34;
-    memory[0x1238] = 0xd9;
-    memory[0x1239] = 0x23;
-    memory[0x123a] = 0x33;
-    memory[0x123b] = 0x60;
+    write_memory(cpu->PC, 0x38);
 
     while (69)
     {

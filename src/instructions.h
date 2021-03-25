@@ -33,6 +33,6 @@ typedef struct
 
 cycle_count run_instruction(cpu_status *cpu, instruction *instr);
 
-instruction opcode_table[256];
+extern instruction opcode_table[256];
 
 #endif

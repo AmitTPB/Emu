@@ -1,5 +1,5 @@
 #include "memory.h"
-
+byte memory[MEM_SIZE];
 void init_memory(char *path)
 {
     FILE *fp = fopen(path, "rb");
