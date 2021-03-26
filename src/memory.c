@@ -14,9 +14,9 @@ void dump_memory()
     fwrite(memory, sizeof(byte), 0xF000, fp);
 }
 
-byte read_memory(word addr) { return memory[addr]; }
+byte read_memory(word addr) { return mmu.cpu_read_byte(addr); }
 
-void write_memory(word addr, byte value) { memory[addr] = value; }
+void write_memory(word addr, byte value) { mmu.cpu_write_byte(addr, value); }
 
 word read_memory_word(word addr)
 {

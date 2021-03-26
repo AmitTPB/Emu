@@ -37,11 +37,9 @@ int main(int argc, char *argv[])
     ines_rom *rom = parse_ines_rom(nes_path);
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-    mmu.cpu_read_byte(1);
 
     cpu->A = 0x90;
     write_memory(cpu->PC, 0x38);
-
     while (69)
     {
         printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);

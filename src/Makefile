@@ -10,7 +10,5 @@ all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LBLIBS)
-	-./run
-	rm run
 clean:
 	rm run
