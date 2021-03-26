@@ -1,10 +1,9 @@
 #include "memory.h"
 byte memory[MEM_SIZE];
+ines_rom *rom;
 void init_memory(char *path)
 {
-    FILE *fp = fopen(path, "rb");
-    fseek(fp, 0x10, SEEK_SET);
-    fread(&memory[0x8000], sizeof(byte), 0x8000, fp);
+    rom = parse_ines_rom(path);
 }
 
 void dump_memory()
@@ -14,9 +13,13 @@ void dump_memory()
     fwrite(memory, sizeof(byte), 0xF000, fp);
 }
 
-byte read_memory(word addr) { return mmu.cpu_read_byte(addr); }
+void free_memory(){
+    free_ines_rom(rom);
+}
 
-void write_memory(word addr, byte value) { mmu.cpu_write_byte(addr, value); }
+byte read_memory(word addr) { return mmu.cpu_read_byte(addr, rom); }
+
+void write_memory(word addr, byte value) { mmu.cpu_write_byte(addr, value, rom); }
 
 word read_memory_word(word addr)
 {

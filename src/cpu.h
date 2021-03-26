@@ -7,6 +7,6 @@
 #include "opcode.h"
 
 cpu_status *New_CPU();
-int exec_instruction(cpu_status *cpu, ines_rom *rom);
+cycle_count exec_instruction(cpu_status *cpu);
 
 #endif
