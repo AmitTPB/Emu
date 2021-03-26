@@ -17,7 +17,6 @@ cycle_count instruction_dey(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_dec(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
     write_memory(input, read_memory(input) - 1);
     change_flag(status, read_memory(input) - 1 == 0, Z_flag);
     change_flag(status, check_bit(read_memory(input) - 1, 7), N_flag);
@@ -42,7 +41,6 @@ cycle_count instruction_iny(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_inc(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
     write_memory(input, read_memory(input) + 1);
     change_flag(status, read_memory(input) + 1 == 0, Z_flag);
     change_flag(status, check_bit(read_memory(input) + 1, 7), N_flag);

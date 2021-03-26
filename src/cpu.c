@@ -42,11 +42,11 @@ int main(int argc, char *argv[])
     cpu->A = 0x90;
     while (69)
     {
-        printf("A: %x, X: %x, Y: %x, P: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P);
+        printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
                cpu->PC);
         printf("took %d cycles!\n", exec_instruction(cpu));
-        getchar();
+        //getchar();
     }
 
     free(cpu);

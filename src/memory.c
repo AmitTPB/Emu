@@ -1,9 +1,10 @@
 #include "memory.h"
-byte memory[MEM_SIZE];
+byte *memory;
 ines_rom *rom;
 void init_memory(char *path)
 {
     rom = parse_ines_rom(path);
+    memory = malloc(MEM_SIZE * sizeof(byte));
 }
 
 void dump_memory()
@@ -17,9 +18,9 @@ void free_memory(){
     free_ines_rom(rom);
 }
 
-byte read_memory(word addr) { return mmu.cpu_read_byte(addr, rom); }
+byte read_memory(word addr) { return mmu.cpu_read_byte(addr, rom, memory); }
 
-void write_memory(word addr, byte value) { mmu.cpu_write_byte(addr, value, rom); }
+void write_memory(word addr, byte value) { mmu.cpu_write_byte(addr, value, rom, memory); }
 
 word read_memory_word(word addr)
 {
@@ -41,8 +42,8 @@ void push_byte(cpu_status *status, byte value)
 
 void push_word(cpu_status *status, word value)
 {
-    write_memory_word((status->SP - 1) | 0x0100, value);
     status->SP -= 2;
+    write_memory_word((status->SP + 1) | 0x0100, value);
 }
 
 byte pop_byte(cpu_status *status)
@@ -53,6 +54,6 @@ byte pop_byte(cpu_status *status)
 
 word pop_word(cpu_status *status)
 {
-    return read_memory_word((status->SP + 1) | 0x100);
     status->SP += 2;
+    return read_memory_word((status->SP - 1) | 0x100);
 }

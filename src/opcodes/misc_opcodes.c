@@ -49,7 +49,6 @@ cycle_count instruction_clv(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_jmp(cpu_status *status, word input, bool mem)
 {
-    assert(mem);
     status->PC = input - 3;
     return -1;
 }
@@ -83,21 +82,18 @@ cycle_count instruction_ldy(cpu_status *status, word input, bool mem)
 
 cycle_count instruction_sta(cpu_status *status, word input, bool mem)
 {
-    // assert(mem);
     write_memory(input, status->A);
     return 0;
 }
 
 cycle_count instruction_sty(cpu_status *status, word input, bool mem)
 {
-    // assert(mem);
     write_memory(input, status->Y);
     return 0;
 }
 
 cycle_count instruction_stx(cpu_status *status, word input, bool mem)
 {
-    // assert(mem);
     write_memory(input, status->X);
     return 0;
 }

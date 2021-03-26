@@ -3,9 +3,9 @@
 
 #include "ines.h"
 #include "mappers/mappers.h"
-#define MEM_SIZE 65536
+#define MEM_SIZE 0x2000
 
-extern byte memory[MEM_SIZE];
+extern byte *memory;
 extern ines_rom *rom;
 
 void init_memory();
