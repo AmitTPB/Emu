@@ -273,7 +273,8 @@ cycle_count instruction_bne(cpu_status *status, word input, bool mem)
             result = status->PC + input - 1;
         }
         bool new_page = (result >> 8) != status->PC >> 8;
-        status->PC = result;
+        printf("result %x\n", result);
+        status->PC = result-1;
         return new_page + 1;
     }
     return 0;
