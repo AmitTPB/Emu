@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
 
-    cpu->A = 0x90;
     while (69)
     {
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
