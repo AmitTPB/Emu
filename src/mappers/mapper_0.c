@@ -14,7 +14,6 @@ byte mapper0_cpu_read_byte(word addr, ines_rom *rom, byte *memory){
     }
     if(addr>=0x2000){
         printf("tried to read %x from io registers, not yet implemented.\n", addr);
-        getchar();
         return 0;
     }
     printf("tried to read: %x from ram, and got %x\n", addr, memory[addr]);
@@ -23,11 +22,13 @@ byte mapper0_cpu_read_byte(word addr, ines_rom *rom, byte *memory){
 }
 void mapper0_cpu_write_byte(word addr, byte value, ines_rom *rom, byte *memory){
     if(addr>=0x8000){
-        printf("tried to write at %x to prg rom, mapped to %x", addr, addr-0x8000);
+        printf("tried to write at %x to prg rom, mapped to %x, this is a read only section!\n", addr, addr-0x8000);
+        getchar();
         return;
     }
     if(addr>=0x6000){
-        printf("tried to write at %x to chr rom, mapped to %x\n", addr, addr-0x6000);
+        printf("tried to write at %x to chr rom, mapped to %x, this is a read only section!\n", addr, addr-0x6000);
+        getchar();
         return;
     }
     if(addr>=0x4020){

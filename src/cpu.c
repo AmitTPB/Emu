@@ -38,14 +38,27 @@ int main(int argc, char *argv[])
     init_memory(nes_path);
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
-
+    int single_step=0;
     while (69)
     {
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
                cpu->PC);
+        for(int i=1;i<argc;i++){
+            if (cpu->PC == (int)strtol(argv[i], NULL, 16)){
+                char inp = getchar();
+                if(inp=='r'){
+                    single_step=1;
+                }
+                if(inp=='o'){
+                    single_step=0;
+                }
+            }
+        }
         printf("took %d cycles!\n", exec_instruction(cpu));
-        //getchar();
+        if(single_step){
+            getchar();
+        }
     }
 
     free(cpu);
