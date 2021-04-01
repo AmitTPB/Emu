@@ -81,43 +81,65 @@ void display_cpu_status(cpu_status *cpu, App *app){
     char buf[40];
     int curr_y = 0;
     SDL_Color col_white = {255, 255, 255, 255};
-    TTF_Font *font = TTF_OpenFont("../resources/comicSans.ttf", 20);
+    TTF_Font *font = TTF_OpenFont(FONT_PATH, 20);
     SDL_Rect *rect = malloc(sizeof(SDL_Rect));
 
-    sprintf(buf, "value of A register is: %x", cpu->A);
+    sprintf(buf, "Current instruction is %x at 0x%x", read_memory(cpu->PC), cpu->PC);
     displayText(app, buf, font, col_white, -5, curr_y, rect);
     curr_y+=rect->h;
 
-    sprintf(buf, "value of X register is: %x", cpu->X);
+    if(cpu->A<=0xf)
+    {
+        sprintf(buf, "value of A register is: 0x0%x", cpu->A);
+    }
+    else
+    {
+        sprintf(buf, "value of A register is: 0x%x", cpu->A);
+    }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
     curr_y+=rect->h;
 
-    sprintf(buf, "value of Y register is: %x", cpu->Y);
+    if(cpu->X<=0xf)
+    {
+        sprintf(buf, "value of X register is: 0x0%x", cpu->X);
+    }
+    else
+    {
+        sprintf(buf, "value of X register is: 0x%x", cpu->X);
+    }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
     curr_y+=rect->h;
 
-    sprintf(buf, "Current instruction is %x at %x", read_memory(cpu->PC), cpu->PC);
+    if(cpu->Y<=0xf)
+    {
+        sprintf(buf, "value of Y register is: 0x0%x", cpu->Y);
+    }
+    else
+    {
+        sprintf(buf, "value of Y register is: 0x%x", cpu->Y);
+    }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
     curr_y+=rect->h;
 
+    
     TTF_CloseFont(font);
     free(rect);
 }
 
 void display_memory_status(cpu_status *cpu, App *app){
-    word start = cpu->PC - cpu->PC%0x80;
+    word start = cpu->PC - cpu->PC%0x40;
     int curr_y = 0;
     char buf[30];
     SDL_Color col_white = {255, 255, 255, 255};
-    TTF_Font *font = TTF_OpenFont("../resources/comicSans.ttf", 20);
+    TTF_Font *font = TTF_OpenFont(FONT_PATH, 20);
     SDL_Rect *rect = malloc(sizeof(SDL_Rect));
-    for(int row = 0;row<15;row++){
+    for(int row = 0;row<8;row++){
         int curr_x = 0;
-        sprintf(buf, "%x:", start + row);
+        sprintf(buf, "%x:", start + 0x10*row);
         displayText(app, buf, font, col_white, 0, curr_y, rect);
         curr_x+=rect->w + 5;
-        for(int column = 0;column<15;column++){
-            byte read_byte = read_memory(start+0xF*row+column);
+        for(int column = 0;column<16;column++){
+            byte read_byte = read_memory(start+0x10*row+column);
             if(read_byte<=0xf){
                sprintf(buf, "0x0%x", read_byte);
             }
@@ -125,7 +147,7 @@ void display_memory_status(cpu_status *cpu, App *app){
                 sprintf(buf, "0x%x", read_byte);
             }
             displayText(app, buf, font, col_white, curr_x, curr_y, rect);
-            if(start+0xF*row+column==cpu->PC){
+            if(start+0x10*row+column==cpu->PC){
                 SDL_SetRenderDrawColor(app->renderer, 0x93, 0x26, 0x00, 255);
                 SDL_RenderFillRect(app->renderer, rect);
                 SDL_SetRenderDrawColor(app->renderer, 0x00, 0x1a, 0x51, 0xFF);

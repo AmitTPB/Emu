@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
                cpu->PC);
+        
         SDL_RenderClear(app->renderer);
         display_cpu_status(cpu, app);
         display_memory_status(cpu, app);

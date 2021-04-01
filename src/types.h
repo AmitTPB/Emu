@@ -14,6 +14,7 @@
 #define signed_byte int8_t
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 1000
+#define FONT_PATH "../resources/ComicMono.ttf"
 
 typedef enum
 {
