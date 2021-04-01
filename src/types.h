@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
+#include <SDL2/SDL.h>
 
 #define byte uint8_t
 #define word uint16_t
@@ -28,5 +29,11 @@ typedef struct
     word PC;
     byte A, X, Y, P, SP;
 } cpu_status;
+
+typedef struct
+{
+    SDL_Renderer *renderer;
+    SDL_Window *window;
+} App;
 
 #endif

@@ -1,4 +1,5 @@
 #include "cpu.h"
+#include <SDL2/SDL_timer.h>
 
 cpu_status *New_CPU()
 {
@@ -34,12 +35,13 @@ int main(int argc, char *argv[])
 {
     init_opcodes();
     init_mapper(0);
-    char *nes_path = "cpu_dummy_reads.nes";
+    char *nes_path = "../resources/cpu_dummy_reads.nes";
     init_memory(nes_path);
     cpu_status *cpu = New_CPU();
     clear_flag(cpu, C_flag);
     int single_step=0;
-    while (69)
+    App *app = Init_Emulator_window();
+    while (0)
     {
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
@@ -60,6 +62,9 @@ int main(int argc, char *argv[])
             getchar();
         }
     }
+    displayText(app, "Hello, World!", 10, 10, 40);
+    SDL_Delay(6000);
+    kill_Emulator_Window(app->window);
 
     free(cpu);
 }
