@@ -1,7 +1,4 @@
 #include "cpu.h"
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_timer.h>
 
 cpu_status *New_CPU()
 {

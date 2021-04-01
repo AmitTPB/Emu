@@ -1,9 +1,6 @@
 #include "visual.h"
 #include "memory.h"
 #include "types.h"
-#include <SDL2/SDL_rect.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_video.h>
 
 App *Init_Emulator_window(){
     App *app = malloc(sizeof(App));
