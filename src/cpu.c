@@ -1,4 +1,6 @@
 #include "cpu.h"
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_render.h>
 #include <SDL2/SDL_timer.h>
 
 cpu_status *New_CPU()
@@ -33,6 +35,7 @@ cycle_count exec_instruction(cpu_status *cpu)
 
 int main(int argc, char *argv[])
 {
+    atexit(SDL_Quit);
     init_opcodes();
     init_mapper(0);
     char *nes_path = "../resources/cpu_dummy_reads.nes";
@@ -41,11 +44,23 @@ int main(int argc, char *argv[])
     clear_flag(cpu, C_flag);
     int single_step=0;
     App *app = Init_Emulator_window();
-    while (0)
+    while (69)
     {
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
                cpu->PC);
+        SDL_RenderClear(app->renderer);
+        display_cpu_status(cpu, app);
+        display_memory_status(cpu, app);
+        SDL_RenderPresent(app->renderer);
+        doInput();
+        SDL_Delay(500);
+        
+        /*
+        if(getchar()=='s'){
+            break;
+        }*/
+        
         for(int i=1;i<argc;i++){
             if (cpu->PC == (int)strtol(argv[i], NULL, 16)){
                 char inp = getchar();
@@ -62,9 +77,7 @@ int main(int argc, char *argv[])
             getchar();
         }
     }
-    displayText(app, "Hello, World!", 10, 10, 40);
-    SDL_Delay(6000);
     kill_Emulator_Window(app->window);
-
     free(cpu);
+    free(app);
 }

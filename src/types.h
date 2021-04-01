@@ -12,6 +12,8 @@
 #define word uint16_t
 #define cycle_count unsigned int
 #define signed_byte int8_t
+#define SCREEN_WIDTH 1600
+#define SCREEN_HEIGHT 1000
 
 typedef enum
 {

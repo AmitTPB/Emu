@@ -6,6 +6,7 @@
 #include "instructions.h"
 #include "opcode.h"
 #include "visual.h"
+#include "input.h"
 
 cpu_status *New_CPU();
 cycle_count exec_instruction(cpu_status *cpu);
