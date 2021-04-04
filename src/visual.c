@@ -8,12 +8,12 @@ App *Init_Emulator_window(){
     {
         printf("Couldn't initialize SDL: %s\n", SDL_GetError());
         exit(1);
-	}
+    }
     if (TTF_Init() < 0)
     {
         printf("Couldn't initialize TTF: %s\n", TTF_GetError());
         exit(1);
-	}
+    }
     app->window = SDL_CreateWindow("Emulator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     if(!app->window)
@@ -27,10 +27,10 @@ App *Init_Emulator_window(){
     app->renderer = SDL_CreateRenderer(app->window, -1, SDL_RENDERER_ACCELERATED);
 
     if (!app->renderer)
-	{
+    {
         printf("Failed to create renderer: %s\n", SDL_GetError());
         exit(1);
-	}
+    }
 
     SDL_SetRenderDrawColor(app->renderer, 0x00, 0x1a, 0x51, 0xFF);
     SDL_RenderClear(app->renderer);
@@ -86,7 +86,7 @@ void display_cpu_status(cpu_status *cpu, App *app){
 
     sprintf(buf, "Current instruction is %x at 0x%x", read_memory(cpu->PC), cpu->PC);
     displayText(app, buf, font, col_white, -5, curr_y, rect);
-    curr_y+=rect->h;
+    curr_y+=24;
 
     if(cpu->A<=0xf)
     {
@@ -97,7 +97,7 @@ void display_cpu_status(cpu_status *cpu, App *app){
         sprintf(buf, "value of A register is: 0x%x", cpu->A);
     }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
-    curr_y+=rect->h;
+    curr_y+=24;
 
     if(cpu->X<=0xf)
     {
@@ -108,7 +108,7 @@ void display_cpu_status(cpu_status *cpu, App *app){
         sprintf(buf, "value of X register is: 0x%x", cpu->X);
     }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
-    curr_y+=rect->h;
+    curr_y+=24;
 
     if(cpu->Y<=0xf)
     {
@@ -119,9 +119,8 @@ void display_cpu_status(cpu_status *cpu, App *app){
         sprintf(buf, "value of Y register is: 0x%x", cpu->Y);
     }
     displayText(app, buf, font, col_white, -5, curr_y, rect);
-    curr_y+=rect->h;
+    curr_y+=24;
 
-    
     TTF_CloseFont(font);
     free(rect);
 }
@@ -155,7 +154,7 @@ void display_memory_status(cpu_status *cpu, App *app){
             }
             curr_x+=rect->w + 5;
         }
-        curr_y+=rect->h;
+        curr_y+=24;
     }
     TTF_CloseFont(font);
     free(rect);

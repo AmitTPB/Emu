@@ -46,19 +46,18 @@ int main(int argc, char *argv[])
         printf("A: %x, X: %x, Y: %x, P: %x SP: %x\n", cpu->A, cpu->X, cpu->Y, cpu->P, cpu->SP);
         printf("current instruction is %x at %x\n", read_memory(cpu->PC),
                cpu->PC);
-        
+
         SDL_RenderClear(app->renderer);
         display_cpu_status(cpu, app);
         display_memory_status(cpu, app);
         SDL_RenderPresent(app->renderer);
         doInput();
         SDL_Delay(500);
-        
-        /*
-        if(getchar()=='s'){
+
+        /*if(getchar()=='s'){
             break;
         }*/
-        
+
         for(int i=1;i<argc;i++){
             if (cpu->PC == (int)strtol(argv[i], NULL, 16)){
                 char inp = getchar();
