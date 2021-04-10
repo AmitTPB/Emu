@@ -3,7 +3,7 @@
 
 #include "ines.h"
 #include "mappers/mappers.h"
-#define MEM_SIZE 0x2000
+#define MEM_SIZE 0x0800
 
 extern byte *memory;
 extern ines_rom *rom;

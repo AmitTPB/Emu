@@ -14,3 +14,4 @@ void kill_Emulator_Window(SDL_Window *window);
 void displayText(App *app, char *msg, TTF_Font *font, SDL_Color col, int msg_x, int msg_y, SDL_Rect *result);
 void display_cpu_status(cpu_status *cpu, App *app);
 void display_memory_status(cpu_status *cpu, App *app);
+void display_status(cpu_status *cpu, App* app);

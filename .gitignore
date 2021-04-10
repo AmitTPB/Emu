@@ -55,6 +55,8 @@ dkms.conf
 .vscode/settings.json
 
 src/run
+src/a.out
+
 
 src/.gdb_history
 

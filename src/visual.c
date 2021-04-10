@@ -1,6 +1,7 @@
 #include "visual.h"
 #include "memory.h"
 #include "types.h"
+#include <SDL2/SDL_render.h>
 
 App *Init_Emulator_window(){
     App *app = malloc(sizeof(App));
@@ -158,4 +159,11 @@ void display_memory_status(cpu_status *cpu, App *app){
     }
     TTF_CloseFont(font);
     free(rect);
+}
+
+void display_status(cpu_status *cpu, App* app){
+    SDL_RenderClear(app->renderer);
+    display_cpu_status(cpu, app);
+    display_memory_status(cpu, app);
+    SDL_RenderPresent(app->renderer);
 }

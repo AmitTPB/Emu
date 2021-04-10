@@ -4,11 +4,11 @@ LDFLAGS =  -fsanitize=address
 
 SRC = *.c opcodes/*.c mappers/*.c
 OBJ = $(SRC:.cc=.o)
-TARGET = run
+TARGET = a.out
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LBLIBS)
 clean:
-	rm run
+	rm a.out

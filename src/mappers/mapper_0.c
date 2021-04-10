@@ -1,24 +1,25 @@
 #include "mapper_0.h"
 byte mapper0_cpu_read_byte(word addr, ines_rom *rom, byte *memory){
     if(addr>=0x8000){
-        printf("tried to read: %x from prg rom, mapped to %x, and got %x\n", addr, addr-0x8000, rom->prg_rom[addr-0x8000]);
+        //printf("tried to read: %x from prg rom, mapped to %x, and got %x\n", addr, addr-0x8000, rom->prg_rom[addr-0x8000]);
+        
         return rom->prg_rom[addr-0x8000];
     }
     if(addr>=0x6000){
-        printf("tried to read: %x from chr rom, mapped to %x, and got %x\n", addr, addr-0x6000, rom->chr_rom[addr-0x6000]);
+        //printf("tried to read: %x from chr rom, mapped to %x, and got %x\n", addr, addr-0x6000, rom->chr_rom[addr-0x6000]);
         return rom->chr_rom[addr-0x6000];
     }
     if(addr>=0x4020){
-        printf("tried to read %x from expansion rom, probably a bug\n", addr);
+        //printf("tried to read %x from expansion rom, probably a bug\n", addr);
         return -1;
     }
     if(addr>=0x2000){
         printf("tried to read %x from io registers, not yet implemented.\n", addr);
         return 0;
     }
-    printf("tried to read: %x from ram, and got %x\n", addr, memory[addr]);
+    printf("tried to read: %x from ram, and got %x\n", addr, memory[addr&0x07ff]);
 
-    return memory[addr];
+    return memory[addr&0x07ff];
 }
 void mapper0_cpu_write_byte(word addr, byte value, ines_rom *rom, byte *memory){
     if(addr>=0x8000){
@@ -39,7 +40,7 @@ void mapper0_cpu_write_byte(word addr, byte value, ines_rom *rom, byte *memory){
         printf("tried to write at %x to io registers, not yet implemented.\n", addr);
         return;
     }
-    printf("tried to write at %x to ram\n", addr);
+    printf("tried to write at %x to ram\n", addr&0x07ff);
 
-    memory[addr] = value;
+    memory[addr&0x07ff] = value;
 }
